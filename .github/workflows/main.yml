@@ -2,9 +2,16 @@ name: Build and test app
 
 on:
   push:
-    branches: [ "master", "develop" ]
+    branches:
+    - master
+    - develop
+    - release/*
+    - bugfix/*
+    - hotfix/*
   pull_request:
-    branches: [ "master", "develop" ]
+    branches:
+    - master
+    - develop
 
 jobs:
   build:
