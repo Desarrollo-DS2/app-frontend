@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react'
 
-import Homepage from '../../app/page'
+import LoginPage from '../../app/login/page'
 
 // This is a example of a test
-describe('Homepage', () => {
+describe('Login', () => {
   const setup = () => {
-    render(<Homepage />)
+    render(<LoginPage />)
   }
 
   it('renders a heading', () => {
     setup()
-    expect(screen.getByText('Templates')).toBeInTheDocument()
+    expect(screen.getByText('Login')).toBeInTheDocument()
   })
 })
