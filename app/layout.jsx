@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 
 import { RootProvider } from './_providers/RootProvider'
+import { AntdRegistry } from '@ant-design/nextjs-registry'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,9 +14,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <RootProvider />
-      <body className={inter.className}>{children}</body>
-      <RootProvider />
+      <RootProvider>
+        <AntdRegistry>
+          <body className={inter.className}>{children}</body>
+        </AntdRegistry>
+      </RootProvider>
     </html>
   )
 }
