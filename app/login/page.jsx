@@ -8,7 +8,7 @@ import LoginHeader from './LoginHeader'
 
 export default function LoginPage() {
   return (
-    <Flex className=" shadow-md">
+    <Flex className="shadow-md m-5">
       <LoginSide />
       <Flex
         gap={10}

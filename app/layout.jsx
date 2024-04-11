@@ -26,7 +26,13 @@ export default function RootLayout({ children }) {
           <ConfigProvider
             theme={{
               token: { fontFamily: poppins.style.fontFamily },
-              components: { Button: { colorPrimary: '#B91C1C', colorPrimaryHover: '#AC1A2A', colorPrimaryActive: '#AC1A2A'} },
+              components: {
+                Button: {
+                  colorPrimary: '#B91C1C',
+                  colorPrimaryHover: '#AC1A2A',
+                  colorPrimaryActive: '#AC1A2A',
+                },
+              },
             }}
           >
             <body className={poppins.className + ' w-full h-full bg-slate-200'}>
