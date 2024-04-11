@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { findByText, fireEvent, render, screen } from '@testing-library/react'
 
 import LoginForm from '../../app/login/LoginForm'
 import { describe } from 'node:test'
@@ -68,6 +68,35 @@ describe('Login Form', () => {
     const passwordTextField = screen.getByTestId('password')
     fireEvent.change(passwordTextField, { target: { value: 'password' } })
     expect(passwordTextField.value).toBe('password')
+  })
+
+  it('Should show an error message when email is invalid', async () => {
+    setup()
+    const emailTextField = screen.getByTestId('email')
+    fireEvent.change(emailTextField, { target: { value: 'test' } })
+    fireEvent.blur(emailTextField)
+    await screen.findByText(/Por favor ingrese un correo institucional valido/i)
+    expect(screen.getByText(/Por favor ingrese un correo institucional valido/i)).toBeInTheDocument()
+  })
+
+  it('Should show an error message when email is empty', async () => {
+    setup()
+    const emailTextField = screen.getByTestId('email')
+    fireEvent.change(emailTextField, { target: { value: 'a' } })
+    fireEvent.change(emailTextField, { target: { value: '' } })
+    fireEvent.blur(emailTextField)
+    await screen.findByText(/Por favor ingrese su correo institucional/i)
+    expect(screen.getByText(/Por favor ingrese su correo institucional/i)).toBeInTheDocument()
+  })
+
+  it('Should show an error message when password is empty', async () => {
+    setup()
+    const passwordTextField = screen.getByTestId('password')
+    fireEvent.change(passwordTextField, { target: { value: 'a' } })
+    fireEvent.change(passwordTextField, { target: { value: '' } })
+    fireEvent.blur(passwordTextField)
+    await screen.findByText(/Por favor ingrese su contraseña/i)
+    expect(screen.getByText("Por favor ingrese su contraseña")).toBeInTheDocument()
   })
 
   it('Password field should be a password input', () => {
