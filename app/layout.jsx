@@ -1,10 +1,17 @@
-import { Inter } from 'next/font/google'
+import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 
 import { RootProvider } from './_providers/RootProvider'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
+import { ConfigProvider } from 'antd'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '900'],
+  preload: false,
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -13,10 +20,25 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={'w-full h-full'}>
       <RootProvider>
         <AntdRegistry>
-          <body className={inter.className}>{children}</body>
+          <ConfigProvider
+            theme={{
+              token: { fontFamily: poppins.style.fontFamily },
+              components: {
+                Button: {
+                  colorPrimary: '#B91C1C',
+                  colorPrimaryHover: '#AC1A2A',
+                  colorPrimaryActive: '#AC1A2A',
+                },
+              },
+            }}
+          >
+            <body className={poppins.className + ' w-full h-full bg-slate-200'}>
+              {children}
+            </body>
+          </ConfigProvider>
         </AntdRegistry>
       </RootProvider>
     </html>
