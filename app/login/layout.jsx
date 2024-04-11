@@ -1,3 +1,11 @@
+import { Flex } from 'antd'
+
 export default function LoginLayout({ children }) {
-  return <div>{children}</div>
+  return (
+    <Flex className="items-center justify-center h-full w-full">
+      <Flex className="items-center justify-center" vertical>
+        {children}
+      </Flex>
+    </Flex>
+  )
 }

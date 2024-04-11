@@ -1,0 +1,13 @@
+import { IoRestaurant } from 'react-icons/io5'
+
+import { Flex } from 'antd'
+
+function LoginSide() {
+  return (
+    <Flex className="items-center justify-center bg-red-700 p-5 pt-7 rounded-tl-md rounded-bl-md">
+      <IoRestaurant size={50} />
+    </Flex>
+  )
+}
+
+export default LoginSide
