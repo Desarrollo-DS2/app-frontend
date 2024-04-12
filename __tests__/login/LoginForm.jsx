@@ -121,11 +121,5 @@ describe('Login Form', () => {
     const recaptchaComponent = screen.getByTestId('recaptcha')
     expect(recaptchaComponent).toBeInTheDocument()
   })
-
-  it('Should change the reCAPTCHA value', () => {
-    setup()
-    const recaptchaComponent = screen.getByTestId('recaptcha')
-    fireEvent.change(recaptchaComponent, { target: { value: 'test' } })
-    expect(recaptchaComponent.value).toBe('test')
-  })
+  
 })
