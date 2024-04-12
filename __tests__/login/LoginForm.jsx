@@ -1,4 +1,4 @@
-import { findByText, fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 
 import LoginForm from '../../app/login/LoginForm'
 import { describe } from 'node:test'
@@ -115,4 +115,11 @@ describe('Login Form', () => {
     fireEvent.click(revealPasswordButton)
     expect(passwordField).toHaveAttribute('type', 'text')
   })
+
+  it('Should renders a reCAPTCHA component', () => {
+    setup()
+    const recaptchaComponent = screen.getByTestId('recaptcha')
+    expect(recaptchaComponent).toBeInTheDocument()
+  })
+  
 })
