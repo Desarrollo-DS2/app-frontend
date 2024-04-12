@@ -1,4 +1,4 @@
-import { findByText, fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 
 import LoginForm from '../../app/login/LoginForm'
 import { describe } from 'node:test'
@@ -114,5 +114,18 @@ describe('Login Form', () => {
     expect(passwordField).toHaveAttribute('type', 'password')
     fireEvent.click(revealPasswordButton)
     expect(passwordField).toHaveAttribute('type', 'text')
+  })
+
+  it('Should renders a reCAPTCHA component', () => {
+    setup()
+    const recaptchaComponent = screen.getByTestId('recaptcha')
+    expect(recaptchaComponent).toBeInTheDocument()
+  })
+
+  it('Should change the reCAPTCHA value', () => {
+    setup()
+    const recaptchaComponent = screen.getByTestId('recaptcha')
+    fireEvent.change(recaptchaComponent, { target: { value: 'test' } })
+    expect(recaptchaComponent.value).toBe('test')
   })
 })

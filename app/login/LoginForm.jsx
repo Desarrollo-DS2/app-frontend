@@ -1,8 +1,9 @@
 'use client'
 
 import React from 'react'
-import { Button, Form, Input, Tooltip } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 const onFinish = (values) => {
   console.log('Success:', values)
@@ -64,7 +65,11 @@ const App = () => (
       </Button>
     </Form.Item>
 
-    <Form.Item className=" flex items-center justify-center">
+    <Form.Item className='flex items-center justify-center'>
+      <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} onFinish={null} data-testid="recaptcha"/>
+    </Form.Item>
+
+    <Form.Item className="flex items-center justify-center">
       <Button type="primary" htmlType="submit">
         Iniciar Sesion
       </Button>
