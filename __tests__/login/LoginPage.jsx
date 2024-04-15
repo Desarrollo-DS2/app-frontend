@@ -9,9 +9,11 @@ window.matchMedia = jest.fn(() => ({
 }))
 
 test('Should renders page components', () => {
-  render(<AuthUserProvider>
-    <LoginPage />
-  </AuthUserProvider>)
+  render(
+    <AuthUserProvider>
+      <LoginPage />
+    </AuthUserProvider>
+  )
   expect(screen.getByTestId('header')).toBeInTheDocument()
   expect(screen.getByTestId('side')).toBeInTheDocument()
   expect(screen.getByTestId('form')).toBeInTheDocument()

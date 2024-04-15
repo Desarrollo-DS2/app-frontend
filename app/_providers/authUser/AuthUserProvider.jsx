@@ -38,7 +38,7 @@ const authUserReducer = (state, action) => {
         error: null,
       }
     case actionTypes.SET_USER:
-      return{
+      return {
         ...state,
         user: action.payload,
       }

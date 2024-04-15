@@ -6,15 +6,17 @@ export const actionTypes = {
   LOGIN_ERROR: 'LOGIN_ERROR',
 }
 
-
 export const login = (dispatch, user) => {
-  dispatch({type: actionTypes.LOGIN, payload: user})
-};
+  dispatch({ type: actionTypes.LOGIN, payload: user })
+}
 
 export const logout = (dispatch) => {
-  dispatch({ type: actionTypes.LOGOUT });
-};
+  dispatch({ type: actionTypes.LOGOUT })
+}
 
 export const login_error = (dispatch) => {
-  dispatch({ type: actionTypes.LOGIN_ERROR, payload: { error: 'Credenciales inválidas' } });
-};
+  dispatch({
+    type: actionTypes.LOGIN_ERROR,
+    payload: { error: 'Credenciales inválidas' },
+  })
+}
