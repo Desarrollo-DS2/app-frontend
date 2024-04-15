@@ -5,24 +5,52 @@ import { Button, Form, Input } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import ReCAPTCHA from 'react-google-recaptcha'
 
-const onFinish = (values) => {
-  console.log('Success:', values)
-}
+import { login, login_error } from '../_providers/authUser/AuthUserActionsType'
+import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
+
+//con una lista prueba
+const defaultUsers = [
+  { id: 1, email: 'user1@correounivalle.edu.co', password: '123456' },
+];
+
+
+const onFinish = async ({ email, password }, dispatch, state) => {
+  const user = defaultUsers.find(
+    (u) => u.email === email && u.password === password
+  );
+
+  if (user) {
+    login(dispatch, user);
+    if (state.loggedIn) {
+      alert('Bienvenido');
+    }
+  } else {
+    login_error(dispatch);
+    if (!state.loggedIn) {
+      alert("Credenciales no válidas");
+    }
+  }
+};
+
+
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo)
 }
 
 const validateEmail = (rule, value) => {
   if (!value.includes('@correounivalle.edu.co') && value) {
-    return Promise.reject('Por favor ingrese un correo institucional valido')
+    return Promise.reject('Por favor ingrese un correo institucional válido')
   }
   return Promise.resolve()
 }
 
-const App = () => (
+const App = () => {
+  const { state, dispatch } = useAuthUser()
+
+  return(
   <Form
     name="login"
-    onFinish={onFinish}
+    onFinish={(values) => onFinish(values, dispatch, state)}
     onFinishFailed={onFinishFailed}
     autoComplete="off"
     layout="vertical"
@@ -75,5 +103,7 @@ const App = () => (
       </Button>
     </Form.Item>
   </Form>
-)
+  )
+}
+
 export default App
