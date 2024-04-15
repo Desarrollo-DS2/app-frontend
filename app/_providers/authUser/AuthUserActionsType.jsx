@@ -1,4 +1,3 @@
-// This is a example of the actions types that you can use in the reducer
 export const actionTypes = {
   SET_USER: 'SET_USER',
   LOGIN: 'LOGIN',
@@ -6,8 +5,8 @@ export const actionTypes = {
   LOGIN_ERROR: 'LOGIN_ERROR',
 }
 
-export const login = (dispatch, user) => {
-  dispatch({ type: actionTypes.LOGIN, payload: user })
+export const login = (dispatch, payload) => {
+  dispatch({ type: actionTypes.LOGIN, payload })
 }
 
 export const logout = (dispatch) => {
