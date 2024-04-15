@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe } from 'node:test'
-import RequestResetPass from '../../app/login/RequiestResetPass'
+import RequestResetPass from '../../app/login/RequestResetPass'
 
 window.matchMedia = jest.fn(() => ({
     matches: false,
@@ -8,7 +8,7 @@ window.matchMedia = jest.fn(() => ({
     removeListener: jest.fn(),
 }))
 
-describe('Requiest Reset Pass', () => {
+describe('Request Reset Pass', () => {
     const setup = () => {
         render(<RequestResetPass />)
     }
