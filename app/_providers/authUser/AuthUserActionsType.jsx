@@ -1,3 +1,5 @@
+import {loginAuthUser} from  '../../_api/authUser/authUser'
+
 // This is a example of the actions types that you can use in the reducer
 export const actionTypes = {
   SET_USER: 'SET_USER',
@@ -7,6 +9,7 @@ export const actionTypes = {
 }
 
 export const login = (dispatch, user) => {
+  loginAuthUser(user)
   dispatch({ type: actionTypes.LOGIN, payload: user })
 }
 

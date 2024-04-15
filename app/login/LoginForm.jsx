@@ -1,10 +1,10 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Form, Input } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import ReCAPTCHA from 'react-google-recaptcha'
-
+import { loginAuthUser } from '../_api/authUser/authUser'
 import { login, login_error } from '../_providers/authUser/AuthUserActionsType'
 import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
 
@@ -14,22 +14,21 @@ const defaultUsers = [
 ]
 
 const onFinish = async ({ email, password }, dispatch, state) => {
-  const user = defaultUsers.find(
-    (u) => u.email === email && u.password === password
-  )
+  
+  const user = {email, password}
 
   if (user) {
-    login(dispatch, user)
-    if (state.loggedIn) {
-      alert('Bienvenido')
-    }
+    loginAuthUser(user).then(login(dispatch, user))
   } else {
     login_error(dispatch)
-    if (!state.loggedIn) {
-      alert('Credenciales no válidas')
-    }
   }
 }
+
+useEffect(() => {
+  if(state.loggedIn){
+    console.log(state.credentials)
+  }
+}, [state.loggedIn]);
 
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo)
