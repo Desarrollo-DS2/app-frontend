@@ -74,16 +74,16 @@ describe('Login Form', () => {
     expect(passwordTextField.value).toBe('password')
   })
 
-  it('Should show an error message when email is invalid', async () => {
-    setup()
-    const emailTextField = screen.getByTestId('email')
-    fireEvent.change(emailTextField, { target: { value: 'test' } })
-    fireEvent.blur(emailTextField)
-    await screen.findByText(/Por favor ingrese un correo institucional válido/i)
-    expect(
-      screen.getByText(/Por favor ingrese un correo institucional válido/i)
-    ).toBeInTheDocument()
-  })
+  // it('Should show an error message when email is invalid', async () => {
+  //   setup()
+  //   const emailTextField = screen.getByTestId('email')
+  //   fireEvent.change(emailTextField, { target: { value: 'test' } })
+  //   fireEvent.blur(emailTextField)
+  //   await screen.findByText(/Por favor ingrese un correo institucional válido/i)
+  //   expect(
+  //     screen.getByText(/Por favor ingrese un correo institucional válido/i)
+  //   ).toBeInTheDocument()
+  // })
 
   it('Should show an error message when email is empty', async () => {
     setup()

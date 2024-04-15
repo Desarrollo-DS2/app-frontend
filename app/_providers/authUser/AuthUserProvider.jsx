@@ -1,6 +1,5 @@
 'use client'
 
-// This is a example of how to use the useAuthUser hook
 import { createContext, useReducer, useContext } from 'react'
 
 import { actionTypes } from './AuthUserActionsType'
@@ -10,6 +9,8 @@ const authUserContext = createContext()
 const initialState = {
   credentials: null,
   loggedIn: false,
+  tokenAccess: null,
+  tokenRefresh: null,
   error: null,
   user: [],
 }
@@ -19,8 +20,10 @@ const authUserReducer = (state, action) => {
     case actionTypes.LOGIN:
       return {
         ...state,
-        credentials: action.payload,
+        credentials: action.payload.user,
         loggedIn: true,
+        tokenAccess: action.payload.access,
+        tokenRefresh: action.payload.refresh,
         error: null,
       }
     case actionTypes.LOGIN_ERROR:
@@ -35,6 +38,8 @@ const authUserReducer = (state, action) => {
         ...state,
         credentials: null,
         loggedIn: false,
+        tokenAccess: null,
+        tokenRefresh: null,
         error: null,
       }
     case actionTypes.SET_USER:

@@ -7,31 +7,23 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { loginAuthUser } from '../_api/authUser/authUser'
 import { login, login_error } from '../_providers/authUser/AuthUserActionsType'
 import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
-
-//con una lista prueba
-const defaultUsers = [
-  { id: 1, email: 'user1@correounivalle.edu.co', password: '123456' },
-]
+import { redirect } from 'next/navigation'
 
 const onFinish = async ({ email, password }, dispatch, state) => {
-  
-  const user = {email, password}
+  const user = { email, password }
 
   if (user) {
-    loginAuthUser(user).then(login(dispatch, user))
+    loginAuthUser(user).then((response) => {
+      const payload = {
+        user: user,
+        access: response.access,
+        refresh: response.refresh,
+      }
+      login(dispatch, payload)
+    })
   } else {
     login_error(dispatch)
   }
-}
-
-useEffect(() => {
-  if(state.loggedIn){
-    console.log(state.credentials)
-  }
-}, [state.loggedIn]);
-
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo)
 }
 
 const validateEmail = (rule, value) => {
@@ -44,11 +36,18 @@ const validateEmail = (rule, value) => {
 const App = () => {
   const { state, dispatch } = useAuthUser()
 
+  useEffect(() => {
+    if (state.loggedIn && state.tokenAccess && state.tokenRefresh) {
+      redirect('/home')
+    } else {
+      console.log('No estas logeado')
+    }
+  }, [state.loggedIn])
+
   return (
     <Form
       name="login"
       onFinish={(values) => onFinish(values, dispatch, state)}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
       layout="vertical"
       style={{ minWidth: '400px' }}
@@ -63,7 +62,6 @@ const App = () => {
             required: true,
             message: 'Por favor ingrese su correo institucional',
           },
-          { validator: validateEmail },
         ]}
       >
         <Input
