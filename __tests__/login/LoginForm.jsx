@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-
+import {AuthUserProvider} from '../../app/_providers/authUser/AuthUserProvider'
 import LoginForm from '../../app/login/LoginForm'
 import { describe } from 'node:test'
 
@@ -11,7 +11,9 @@ window.matchMedia = jest.fn(() => ({
 
 describe('Login Form', () => {
   const setup = () => {
-    render(<LoginForm />)
+    render(<AuthUserProvider>
+      <LoginForm />
+    </AuthUserProvider>)
   }
 
   it('Should render a "Iniciar Sesion" button', () => {
