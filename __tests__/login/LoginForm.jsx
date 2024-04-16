@@ -9,6 +9,10 @@ window.matchMedia = jest.fn(() => ({
   removeListener: jest.fn(),
 }))
 
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({ push: jest.fn() }),
+}))
+
 describe('Login Form', () => {
   const setup = () => {
     render(

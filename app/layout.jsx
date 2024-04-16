@@ -21,26 +21,26 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={'w-full h-full'}>
-      <RootProvider>
-        <AntdRegistry>
-          <ConfigProvider
-            theme={{
-              token: { fontFamily: poppins.style.fontFamily },
-              components: {
-                Button: {
-                  colorPrimary: '#B91C1C',
-                  colorPrimaryHover: '#AC1A2A',
-                  colorPrimaryActive: '#AC1A2A',
+      <body className={poppins.className + ' w-full h-full bg-slate-200'}>
+        <RootProvider>
+          <AntdRegistry>
+            <ConfigProvider
+              theme={{
+                token: { fontFamily: poppins.style.fontFamily },
+                components: {
+                  Button: {
+                    colorPrimary: '#B91C1C',
+                    colorPrimaryHover: '#AC1A2A',
+                    colorPrimaryActive: '#AC1A2A',
+                  },
                 },
-              },
-            }}
-          >
-            <body className={poppins.className + ' w-full h-full bg-slate-200'}>
+              }}
+            >
               {children}
-            </body>
-          </ConfigProvider>
-        </AntdRegistry>
-      </RootProvider>
+            </ConfigProvider>
+          </AntdRegistry>
+        </RootProvider>
+      </body>
     </html>
   )
 }

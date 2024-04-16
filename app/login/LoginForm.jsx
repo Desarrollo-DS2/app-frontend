@@ -1,30 +1,11 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, createRef } from 'react'
 import { Button, Form, Input } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { loginAuthUser } from '../_api/authUser/authUser'
-import { login, login_error } from '../_providers/authUser/AuthUserActionsType'
+import { login, handleLoginError } from '../_providers/authUser/AuthUserActions'
 import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
-import { redirect } from 'next/navigation'
-
-const onFinish = async ({ email, password }, dispatch, state) => {
-  const user = { email, password }
-
-  if (user) {
-    loginAuthUser(user).then((response) => {
-      const payload = {
-        user: user,
-        access: response.access,
-        refresh: response.refresh,
-      }
-      login(dispatch, payload)
-    })
-  } else {
-    login_error(dispatch)
-  }
-}
 
 const validateEmail = (rule, value) => {
   if (!value.includes('@correounivalle.edu.co') && value) {
@@ -36,18 +17,22 @@ const validateEmail = (rule, value) => {
 const App = () => {
   const { state, dispatch } = useAuthUser()
 
-  useEffect(() => {
-    if (state.loggedIn && state.tokenAccess && state.tokenRefresh) {
-      redirect('/home')
+  const recaptchaRef = createRef()
+
+  const onFinish = ({ email, password }) => {
+    const user = { email, password }
+
+    if (user) {
+      login(dispatch, user)
     } else {
-      console.log('No estas logeado')
+      handleLoginError(dispatch)
     }
-  }, [state.loggedIn])
+  }
 
   return (
     <Form
       name="login"
-      onFinish={(values) => onFinish(values, dispatch, state)}
+      onFinish={(values) => onFinish(values)}
       autoComplete="off"
       layout="vertical"
       style={{ minWidth: '400px' }}
@@ -90,6 +75,7 @@ const App = () => {
 
       <Form.Item className="flex items-center justify-center">
         <ReCAPTCHA
+          ref={recaptchaRef}
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
           onFinish={null}
           data-testid="recaptcha"
