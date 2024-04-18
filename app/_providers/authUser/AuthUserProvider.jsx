@@ -1,8 +1,9 @@
 'use client'
 
-import { createContext, useReducer, useContext } from 'react'
+import { createContext, useReducer, useContext, useEffect } from 'react'
 
-import { actionTypes } from './AuthUserActionsType'
+import { actionTypes } from './AuthUserActions'
+import { useRouter } from 'next/navigation'
 
 const authUserContext = createContext()
 
@@ -54,6 +55,15 @@ const authUserReducer = (state, action) => {
 
 export const AuthUserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authUserReducer, initialState)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (state.loggedIn) {
+      router.push('/home')
+    } else {
+      router.push('/login')
+    }
+  }, [state.loggedIn])
 
   return (
     <authUserContext.Provider value={{ state, dispatch }}>

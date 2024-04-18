@@ -8,6 +8,10 @@ window.matchMedia = jest.fn(() => ({
   removeListener: jest.fn(),
 }))
 
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({ push: jest.fn() }),
+}))
+
 test('Should renders page components', () => {
   render(
     <AuthUserProvider>
