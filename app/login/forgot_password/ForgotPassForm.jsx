@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -13,10 +14,10 @@ const validateEmail = (rule, value) => {
     return Promise.resolve()
 }
 
-const RequestResetPass = () => {
+const ForgotPassForm = () => {
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
             <Form
                 name="login"
                 onFinish={onFinish}
@@ -26,7 +27,7 @@ const RequestResetPass = () => {
                 data-testid="form"
             >
                 <Form.Item
-                    label="Correo Institucional"
+                    label="Introduce tu correo para buscar tu cuenta"
                     name="email"
                     tooltip="Debe ser un correo institucional [@correounivalle.edu.co]"
                     rules={[
@@ -53,4 +54,4 @@ const RequestResetPass = () => {
     );
 };
 
-export default RequestResetPass;
+export default ForgotPassForm;

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe } from 'node:test'
-import RequestResetPass from '../../app/login/RequestResetPass'
+import ForgotPassForm from '../../app/login/forgot_password/ForgotPassForm'
 
 window.matchMedia = jest.fn(() => ({
     matches: false,
@@ -10,7 +10,7 @@ window.matchMedia = jest.fn(() => ({
 
 describe('Request Reset Pass', () => {
     const setup = () => {
-        render(<RequestResetPass />)
+        render(<ForgotPassForm />)
     }
 
     it('Should render a text field with id "email"', () => {
@@ -46,8 +46,5 @@ describe('Request Reset Pass', () => {
         await screen.findByText(/Por favor ingrese su correo institucional/i)
         expect(screen.getByText(/Por favor ingrese su correo institucional/i)).toBeInTheDocument()
     })
-
-
-
 
 })

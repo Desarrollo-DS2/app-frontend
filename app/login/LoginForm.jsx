@@ -4,6 +4,7 @@ import React from 'react'
 import { Button, Form, Input } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import ReCAPTCHA from 'react-google-recaptcha'
+import Link from 'next/link'
 
 const onFinish = (values) => {
   console.log('Success:', values)
@@ -60,9 +61,9 @@ const App = () => (
     </Form.Item>
 
     <Form.Item>
-      <Button type="link" style={{ padding: 0 }}>
+      <Link href='/login/forgot_password' style={{ padding: 0 }}>
         Recuperar Contraseña
-      </Button>
+      </Link>
     </Form.Item>
 
     <Form.Item className='flex items-center justify-center'>
