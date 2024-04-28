@@ -4,14 +4,11 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
 
-const ResetForm = () => {
-    const onFinish = (values) => {
-        // Aquí puedes agregar la lógica para restablecer la contraseña
-        console.log('Received values of form:', values);
-        // Una vez que se restablece la contraseña, puedes redirigir al usuario a la página de inicio de sesión
-    };
+const onFinish = (values) => {
+    console.log('Received values of form:', values);
+};
 
-    return (
+const ResetForm = () => (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
             <Form
                 onFinish={onFinish}
@@ -62,7 +59,6 @@ const ResetForm = () => {
                 </Form.Item>
             </Form>
         </div>
-    );
-};
+);
 
 export default ResetForm;
