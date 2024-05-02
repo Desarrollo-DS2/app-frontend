@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe } from 'node:test'
-import ForgotPassForm from '../../app/login/forgot_password/ForgotPassForm'
+import ForgotPassForm from '../../app/forgot-password/ForgotPassForm'
 
 window.matchMedia = jest.fn(() => ({
     matches: false,

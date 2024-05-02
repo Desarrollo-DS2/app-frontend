@@ -1,11 +1,9 @@
 import React from 'react'
 
 import { Flex } from 'antd'
-import LoginSide from '../LoginSide'
+import LoginSide from '../login/LoginSide'
 import ForgotHeader from './ForgotHeader'
 import ForgotPassForm from './ForgotPassForm'
-
-
 
 export default function ForgotPage() {
     return (
