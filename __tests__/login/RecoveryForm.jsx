@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 
 import { describe } from 'node:test'
-import ResetForm from '../../app/login/reset_password/ResetForm'
+import RecoveryForm from '../../app/login/reset_password/RecoveryForm'
 
 window.matchMedia = jest.fn(() => ({
   matches: false,
@@ -11,7 +11,7 @@ window.matchMedia = jest.fn(() => ({
 
 describe('Reset Form', () => {
   const setup = () => {
-    render(<ResetForm />)
+    render(<RecoveryForm />)
   }
 
   it('Should render a "Restablecer Contraseña" button', () => {
