@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 
 import { describe } from 'node:test'
-import RecoveryForm from '../../app/login/reset_password/RecoveryForm'
+import RecoveryForm from '../../app/recovery-password/RecoveryForm'
 
 window.matchMedia = jest.fn(() => ({
   matches: false,
