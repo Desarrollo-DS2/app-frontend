@@ -14,7 +14,7 @@ export default function LoginPage() {
     <div style={{ color: 'black' }}>
       Main page
       <button
-        onClick={ async () => {
+        onClick={async () => {
           const res = await logout(dispatch)
           if (res.success) {
             router.push('/')

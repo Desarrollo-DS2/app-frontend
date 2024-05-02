@@ -39,8 +39,7 @@ export const logout = async (dispatch) => {
     Cookies.remove('currentUser')
     dispatch({ type: actionTypes.LOGOUT })
     return { success: true }
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error)
     return { success: false }
   }
