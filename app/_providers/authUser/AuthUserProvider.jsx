@@ -1,16 +1,48 @@
 'use client'
 
-// This is a example of how to use the useAuthUser hook
-import { createContext, useReducer, useContext } from 'react'
+import { createContext, useReducer, useContext, useEffect } from 'react'
 
-import { actionTypes } from './AuthUserActionsType'
+import { actionTypes } from './AuthUserActions'
+import { useRouter } from 'next/navigation'
 
 const authUserContext = createContext()
 
-const initialState = {}
+const initialState = {
+  credentials: null,
+  loggedIn: false,
+  tokenAccess: null,
+  tokenRefresh: null,
+  error: null,
+  user: [],
+}
 
 const authUserReducer = (state, action) => {
   switch (action.type) {
+    case actionTypes.LOGIN:
+      return {
+        ...state,
+        credentials: action.payload.user,
+        loggedIn: true,
+        tokenAccess: action.payload.access,
+        tokenRefresh: action.payload.refresh,
+        error: null,
+      }
+    case actionTypes.LOGIN_ERROR:
+      return {
+        ...state,
+        credentials: null,
+        loggedIn: false,
+        error: true,
+      }
+    case actionTypes.LOGOUT:
+      return {
+        ...state,
+        credentials: null,
+        loggedIn: false,
+        tokenAccess: null,
+        tokenRefresh: null,
+        error: null,
+      }
     case actionTypes.SET_USER:
       return {
         ...state,
@@ -23,6 +55,15 @@ const authUserReducer = (state, action) => {
 
 export const AuthUserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authUserReducer, initialState)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (state.loggedIn) {
+      router.push('/home')
+    } else {
+      router.push('/login')
+    }
+  }, [state.loggedIn])
 
   return (
     <authUserContext.Provider value={{ state, dispatch }}>

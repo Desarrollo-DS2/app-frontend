@@ -8,7 +8,7 @@ function LoginSide() {
       className="items-center justify-center bg-red-700 p-5 pt-7 rounded-tl-md rounded-bl-md"
       data-testid="side"
     >
-      <IoRestaurant size={50} data-testid="icon-restaurant" />
+      <IoRestaurant size={50} data-testid="icon-restaurant" color="white" />
     </Flex>
   )
 }
