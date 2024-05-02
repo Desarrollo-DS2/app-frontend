@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useEffect, createRef } from 'react'
+import React, { createRef } from 'react'
 import { Button, Form, Input } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { login, handleLoginError } from '../_providers/authUser/AuthUserActions'
 import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
+import { useRouter } from 'next/navigation'
 
 const validateEmail = (rule, value) => {
   if (!value.includes('@correounivalle.edu.co') && value) {
@@ -16,17 +17,30 @@ const validateEmail = (rule, value) => {
 
 const App = () => {
   const { state, dispatch } = useAuthUser()
+  const router = useRouter()
 
   const recaptchaRef = createRef()
 
-  const onFinish = ({ email, password }) => {
+  const onFinish = async ({ email, password }) => {
     const user = { email, password }
 
     if (user) {
-      login(dispatch, user)
+      try {
+        const res = await login(dispatch, user)
+        console.log(res)
+        if (res.success) {
+          router.push('/home')
+        }
+      } catch (error) {
+        handleLoginError(dispatch, null, error)
+      }
     } else {
       handleLoginError(dispatch)
     }
+  }
+
+  const onRecoveryPassword = () => {
+    router.push('/recovery-password')
   }
 
   return (
@@ -68,7 +82,7 @@ const App = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="link" style={{ padding: 0 }}>
+        <Button type="link" style={{ padding: 0 }} onClick={onRecoveryPassword}>
           Recuperar Contraseña
         </Button>
       </Form.Item>

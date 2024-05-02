@@ -9,38 +9,41 @@ export const actionTypes = {
   LOGIN_ERROR: 'LOGIN_ERROR',
 }
 
-export const login = (dispatch, payload, captcha) => {
-  loginAuthUser(payload)
-    .then((response) => {
-      if (response) {
-        const authUser = jwtDecode(response.access)
-        if (authUser) {
-          Cookies.set('currentUser', JSON.stringify(response))
-          dispatch({
-            type: actionTypes.LOGIN,
-            payload: {
-              user: authUser,
-              access: response.access,
-              refresh: response.refresh,
-            },
-          })
-        } else {
-          handleLoginError(dispatch)
-        }
-      } else {
-        handleLoginError(dispatch)
-      }
-    })
-    .catch((error) => {
-      handleLoginError(dispatch)
-    })
+export const login = async (dispatch, payload) => {
+  try {
+    const response = await loginAuthUser(payload)
+    if (response.access) {
+      const user = jwtDecode(response.access)
+      Cookies.set('currentUser', user)
+      dispatch({
+        type: actionTypes.LOGIN,
+        payload: {
+          user,
+          access: response.access,
+          refresh: response.refresh,
+        },
+      })
+      return { success: true }
+    } else {
+      handleLoginError(dispatch, actionTypes.LOGIN_ERROR, response)
+      return { success: false }
+    }
+  } catch (error) {
+    handleLoginError(dispatch, actionTypes.LOGIN_ERROR, error)
+    return { success: false }
+  }
 }
 
-export const logout = (dispatch) => {
-  Cookies.remove('currentUser')
-  dispatch({
-    type: actionTypes.LOGOUT,
-  })
+export const logout = async (dispatch) => {
+  try {
+    Cookies.remove('currentUser')
+    dispatch({ type: actionTypes.LOGOUT })
+    return { success: true }
+  }
+  catch (error) {
+    console.error(error)
+    return { success: false }
+  }
 }
 
 export const handleLoginError = (dispatch, type = null, error = null) => {
