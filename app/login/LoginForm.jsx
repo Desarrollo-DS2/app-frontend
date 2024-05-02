@@ -39,8 +39,8 @@ const App = () => {
     }
   }
 
-  const onRecoveryPassword = () => {
-    router.push('/recovery-password')
+  const onGoForgotPassword = () => {
+    router.push('/forgot-password')
   }
 
   return (
@@ -82,7 +82,7 @@ const App = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="link" style={{ padding: 0 }} onClick={onRecoveryPassword}>
+        <Button type="link" style={{ padding: 0 }} onClick={onGoForgotPassword}>
           Recuperar Contraseña
         </Button>
       </Form.Item>
