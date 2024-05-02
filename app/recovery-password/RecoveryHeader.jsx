@@ -3,7 +3,7 @@ import React from 'react'
 import { Flex } from 'antd'
 import Image from 'next/image'
 
-function ResetHeader() {
+function RecoveryHeader() {
   return (
     <Flex className="items-start justify-between" data-testid="header">
       <h1 className="text-2xl font-bold text-black">Restablecer contraseña</h1>
@@ -12,4 +12,4 @@ function ResetHeader() {
   )
 }
 
-export default ResetHeader
+export default RecoveryHeader

@@ -8,7 +8,7 @@ const onFinish = (values) => {
     console.log('Received values of form:', values);
 };
 
-const ResetForm = () => (
+const RecoveryForm = () => (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
             <Form
                 onFinish={onFinish}
@@ -61,4 +61,4 @@ const ResetForm = () => (
         </div>
 );
 
-export default ResetForm;
+export default RecoveryForm;
