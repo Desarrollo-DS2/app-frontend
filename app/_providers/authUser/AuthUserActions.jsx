@@ -9,28 +9,45 @@ export const actionTypes = {
   LOGIN_ERROR: 'LOGIN_ERROR',
 }
 
-export const login = async (dispatch, payload) => {
-  try {
-    const response = await loginAuthUser(payload)
-    if (response.access) {
-      const user = jwtDecode(response.access)
-      Cookies.set('currentUser', user)
-      dispatch({
-        type: actionTypes.LOGIN,
-        payload: {
-          user,
-          access: response.access,
-          refresh: response.refresh,
-        },
+export const login = (dispatch, payload, captcha) => {
+  if (captcha) {
+    verifyCaptcha({ captcha_token: captcha })
+      .then((response) => {
+        if (response) {
+          loginAuthUser(payload)
+            .then((response) => {
+              if (response) {
+                const authUser = jwtDecode(response.access)
+                if (authUser) {
+                  Cookies.set('currentUser', JSON.stringify(response))
+                  dispatch({
+                    type: actionTypes.LOGIN,
+                    payload: {
+                      user: authUser,
+                      access: response.access,
+                      refresh: response.refresh,
+                    },
+                  })
+                } else {
+                  handleLoginError(dispatch)
+                }
+              } else {
+                handleLoginError(dispatch)
+              }
+            })
+            .catch((error) => {
+              handleLoginError(dispatch)
+            })
+        }
       })
-      return { success: true }
-    } else {
-      handleLoginError(dispatch, actionTypes.LOGIN_ERROR, response)
-      return { success: false }
-    }
-  } catch (error) {
-    handleLoginError(dispatch, actionTypes.LOGIN_ERROR, error)
-    return { success: false }
+      .catch((error) => {
+        if (error.response.data.fail === 'timeout-or-duplicate') {
+        } else {
+          console.log(error.response.data.fail)
+        }
+
+        captcha.current.reset()
+      })
   }
 }
 
