@@ -10,19 +10,19 @@ export default function LoginPage() {
   const { dispatch } = useAuthUser()
   const router = useRouter()
 
+  const handleLogout = async () => {
+    const res = await logout(dispatch)
+    if (res.success) {
+      router.push('/')
+    }
+  }
+
   return (
     <div style={{ color: 'black' }}>
-      Main page
-      <button
-        onClick={async () => {
-          const res = await logout(dispatch)
-          if (res.success) {
-            router.push('/')
-          }
-        }}
-      >
-        Cerrar Sesion
+      Página principal
+      <button onClick={handleLogout}>
+        Cerrar Sesión
       </button>
     </div>
-  )
+  );
 }

@@ -1,11 +1,9 @@
-import { Inter, Poppins } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 
 import { RootProvider } from './_providers/RootProvider'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 import { ConfigProvider } from 'antd'
-
-// const inter = Inter({ subsets: ['latin'] })
 
 const poppins = Poppins({
   subsets: ['latin'],

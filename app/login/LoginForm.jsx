@@ -8,15 +8,20 @@ import { login, handleLoginError } from '../_providers/authUser/AuthUserActions'
 import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
 import { useRouter } from 'next/navigation'
 
-const validateEmail = (rule, value) => {
-  if (!value.includes('@correounivalle.edu.co') && value) {
-    return Promise.reject('Por favor ingrese un correo institucional válido')
+export const validateEmail = (rule, value) => {
+  if (!value || typeof value !== 'string') {
+    return Promise.reject('Por favor ingrese un correo institucional válido');
   }
-  return Promise.resolve()
-}
+
+  if (!value.includes('@correounivalle.edu.co')) {
+    return Promise.reject('Por favor ingrese un correo institucional válido');
+  }
+
+  return Promise.resolve();
+};
 
 const App = () => {
-  const { state, dispatch } = useAuthUser()
+  const { dispatch } = useAuthUser()
   const router = useRouter()
 
   const recaptchaRef = createRef()
