@@ -10,15 +10,15 @@ import { useRouter } from 'next/navigation'
 
 export const validateEmail = (rule, value) => {
   if (!value || typeof value !== 'string') {
-    return Promise.reject('Por favor ingrese un correo institucional válido');
+    return Promise.reject('Por favor ingrese un correo institucional válido')
   }
 
   if (!value.includes('@correounivalle.edu.co')) {
-    return Promise.reject('Por favor ingrese un correo institucional válido');
+    return Promise.reject('Por favor ingrese un correo institucional válido')
   }
 
-  return Promise.resolve();
-};
+  return Promise.resolve()
+}
 
 const App = () => {
   const { dispatch } = useAuthUser()
@@ -27,7 +27,7 @@ const App = () => {
   const recaptchaRef = createRef()
 
   const onFinish = async ({ email, password }) => {
-    const user = { email, password}
+    const user = { email, password }
 
     if (user) {
       try {

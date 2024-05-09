@@ -1,5 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { authUserReducer, AuthUserProvider, initialState } from '../../app/_providers/authUser/AuthUserProvider'
+import {
+  authUserReducer,
+  AuthUserProvider,
+  initialState,
+} from '../../app/_providers/authUser/AuthUserProvider'
 import LoginForm from '../../app/login/LoginForm'
 import { validateEmail } from '../../app/login/LoginForm'
 import { describe } from 'node:test'
@@ -140,26 +144,29 @@ describe('Login Form', () => {
 
 describe('Validate Email', () => {
   it('Should return a promise resolved when email is valid', async () => {
-    const email = 'usuario@correounivalle.edu.co';
-    const result = await validateEmail(null, email);
-    expect(result).toBe(undefined);
-  });
+    const email = 'usuario@correounivalle.edu.co'
+    const result = await validateEmail(null, email)
+    expect(result).toBe(undefined)
+  })
 
   it('Should return a promise rejected when email is invalid', async () => {
-    const email = 'usuario@gmail.com';
-    await expect(validateEmail(null, email)).rejects.toEqual('Por favor ingrese un correo institucional válido');
-  });
+    const email = 'usuario@gmail.com'
+    await expect(validateEmail(null, email)).rejects.toEqual(
+      'Por favor ingrese un correo institucional válido'
+    )
+  })
 
   it('debería resolver si no se proporciona ningún correo (caso de campo vacío)', async () => {
-    await expect(validateEmail(null, '')).rejects.toEqual('Por favor ingrese un correo institucional válido');
-  });
-
+    await expect(validateEmail(null, '')).rejects.toEqual(
+      'Por favor ingrese un correo institucional válido'
+    )
+  })
 })
 
 describe('Auth reducer', () => {
   it('Should return a new state with the user logged in', () => {
     const state = initialState
-    
+
     const action = {
       type: 'LOGIN',
       payload: {
@@ -206,7 +213,6 @@ describe('Auth reducer', () => {
     })
   })
 
-  
   it('Should return a new state with the user loggin error', () => {
     const state = initialState
 

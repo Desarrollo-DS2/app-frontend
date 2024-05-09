@@ -1,4 +1,5 @@
 import { Flex } from 'antd'
+import PropTypes from 'prop-types'
 
 RecoveryLayout.propTypes = {
   children: PropTypes.node.isRequired,

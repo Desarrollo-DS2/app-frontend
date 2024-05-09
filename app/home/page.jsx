@@ -20,9 +20,7 @@ export default function LoginPage() {
   return (
     <div style={{ color: 'black' }}>
       Página principal
-      <button onClick={handleLogout}>
-        Cerrar Sesión
-      </button>
+      <button onClick={handleLogout}>Cerrar Sesión</button>
     </div>
-  );
+  )
 }
