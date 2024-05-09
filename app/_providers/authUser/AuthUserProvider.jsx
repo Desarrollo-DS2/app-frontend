@@ -6,7 +6,7 @@ import { actionTypes } from './AuthUserActions'
 
 const authUserContext = createContext()
 
-const initialState = {
+export const initialState = {
   credentials: null,
   loggedIn: false,
   tokenAccess: null,
@@ -15,7 +15,7 @@ const initialState = {
   user: [],
 }
 
-const authUserReducer = (state, action) => {
+export const authUserReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.LOGIN:
       return {
