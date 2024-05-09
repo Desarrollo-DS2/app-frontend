@@ -34,3 +34,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# github
+.github
+
+# .env
+.env
+
+# SonarQube
+.sonarqube/
+
+# SonarQube analysis reports
+.scannerwork/
+
+# SonarQube cache
+.sonar/cache
+
+# SonarQube logs
+sonarqube.log
