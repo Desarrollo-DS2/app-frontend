@@ -9,12 +9,11 @@ const onFinish = (values) => {
 }
 
 const validatePassword = (rule, value) => {
-  if ((value.length < 8)){
-  return Promise.reject('Ingrese una contraseña válida')
+  if (value.length < 8) {
+    return Promise.reject('Ingrese una contraseña válida')
+  }
+  return Promise.resolve()
 }
-return Promise.resolve()
-}
-
 
 const RecoveryForm = () => (
   <div
@@ -37,7 +36,7 @@ const RecoveryForm = () => (
         name="newPassword"
         rules={[
           { required: true, message: 'Por favor ingrese su nueva contraseña' },
-          {validator: validatePassword}
+          { validator: validatePassword },
         ]}
       >
         <Input
@@ -60,7 +59,7 @@ const RecoveryForm = () => (
               return Promise.reject(new Error('Las contraseñas no coinciden'))
             },
           }),
-          {validator: validatePassword}
+          { validator: validatePassword },
         ]}
       >
         <Input

@@ -1,4 +1,9 @@
 import { Flex } from 'antd'
+import PropTypes from 'prop-types'
+
+HomeLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+}
 
 export default function HomeLayout({ children }) {
   return (

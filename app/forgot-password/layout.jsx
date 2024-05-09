@@ -1,4 +1,9 @@
 import { Flex } from 'antd'
+import PropTypes from 'prop-types'
+
+ForgotLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+}
 
 export default function ForgotLayout({ children }) {
   return (

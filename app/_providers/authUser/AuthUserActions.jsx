@@ -42,10 +42,10 @@ export const login = (dispatch, payload, captcha) => {
       })
       .catch((error) => {
         if (error.response.data.fail === 'timeout-or-duplicate') {
+          console.log('Captcha timeout or duplicate')
         } else {
           console.log(error.response.data.fail)
         }
-
         captcha.current.reset()
       })
   }

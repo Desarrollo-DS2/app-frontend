@@ -1,6 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { AuthUserProvider } from '../../app/_providers/authUser/AuthUserProvider'
+import {
+  authUserReducer,
+  AuthUserProvider,
+  initialState,
+} from '../../app/_providers/authUser/AuthUserProvider'
 import LoginForm from '../../app/login/LoginForm'
+import { validateEmail } from '../../app/login/LoginForm'
 import { describe } from 'node:test'
 
 window.matchMedia = jest.fn(() => ({
@@ -134,5 +139,122 @@ describe('Login Form', () => {
     setup()
     const recaptchaComponent = screen.getByTestId('recaptcha')
     expect(recaptchaComponent).toBeInTheDocument()
+  })
+})
+
+describe('Validate Email', () => {
+  it('Should return a promise resolved when email is valid', async () => {
+    const email = 'usuario@correounivalle.edu.co'
+    const result = await validateEmail(null, email)
+    expect(result).toBe(undefined)
+  })
+
+  it('Should return a promise rejected when email is invalid', async () => {
+    const email = 'usuario@gmail.com'
+    await expect(validateEmail(null, email)).rejects.toEqual(
+      'Por favor ingrese un correo institucional válido'
+    )
+  })
+
+  it('debería resolver si no se proporciona ningún correo (caso de campo vacío)', async () => {
+    await expect(validateEmail(null, '')).rejects.toEqual(
+      'Por favor ingrese un correo institucional válido'
+    )
+  })
+})
+
+describe('Auth reducer', () => {
+  it('Should return a new state with the user logged in', () => {
+    const state = initialState
+
+    const action = {
+      type: 'LOGIN',
+      payload: {
+        user: {
+          email: 'a@gmail.com',
+          password: 'password',
+        },
+        access: 'access',
+        refresh: 'refresh',
+      },
+    }
+
+    const newState = authUserReducer(state, action)
+
+    expect(newState).toEqual({
+      credentials: {
+        email: 'a@gmail.com',
+        password: 'password',
+      },
+      loggedIn: true,
+      tokenAccess: 'access',
+      tokenRefresh: 'refresh',
+      error: null,
+      user: [],
+    })
+  })
+
+  it('Should return a new state with the user logged out', () => {
+    const state = initialState
+
+    const action = {
+      type: 'LOGOUT',
+    }
+
+    const newState = authUserReducer(state, action)
+
+    expect(newState).toEqual({
+      credentials: null,
+      loggedIn: false,
+      tokenAccess: null,
+      tokenRefresh: null,
+      error: null,
+      user: [],
+    })
+  })
+
+  it('Should return a new state with the user loggin error', () => {
+    const state = initialState
+
+    const action = {
+      type: 'LOGIN_ERROR',
+    }
+
+    const newState = authUserReducer(state, action)
+
+    expect(newState).toEqual({
+      credentials: null,
+      loggedIn: false,
+      tokenAccess: null,
+      tokenRefresh: null,
+      error: true,
+      user: [],
+    })
+  })
+
+  it('Should return a new state with the user set', () => {
+    const state = initialState
+
+    const action = {
+      type: 'SET_USER',
+      payload: {
+        name: 'a',
+        email: 'a@gmail.com',
+      },
+    }
+
+    const newState = authUserReducer(state, action)
+
+    expect(newState).toEqual({
+      credentials: null,
+      loggedIn: false,
+      tokenAccess: null,
+      tokenRefresh: null,
+      error: null,
+      user: {
+        name: 'a',
+        email: 'a@gmail.com',
+      },
+    })
   })
 })
