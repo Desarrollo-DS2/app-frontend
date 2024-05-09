@@ -8,3 +8,12 @@ export const loginAuthUser = async (login) => {
     return error.response.data
   }
 }
+
+export const verifyCaptcha = async (captcha) => {
+  try {
+    const response = await apiBase.post('/recaptcha/', captcha)
+    return response.data
+  } catch (error) {
+    return error.response.data
+  }
+}
