@@ -8,7 +8,7 @@ const onFinish = (values) => {
   console.log('Received values of form:', values)
 }
 
-const specialCharactersAllowed = /[!@#$%&*()_+-=;':"|,.<>/?]/
+const specialCharactersAllowed = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
 
 const validatePassword = (rule, value) => {
   if (value.length < 8 ||
