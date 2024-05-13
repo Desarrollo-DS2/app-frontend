@@ -12,7 +12,7 @@ const validatePassword = (rule, value) => {
   if (value.length < 8 ||
     !/[A-Z]/.test(value) ||
     !/[a-z]/.test(value) ||
-    !/[0-9]/.test(value)
+    !/\d/.test(value)
   ) {
     return Promise.reject('Ingrese una contraseña válida')
   }
