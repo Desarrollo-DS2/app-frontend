@@ -41,6 +41,7 @@ const RecoveryForm = () => (
       <Form.Item
         label="Nueva contraseña"
         name="newPassword"
+        tooltip = "La contraseña debe tener mínimo 8 caracteres, una letra mayúscula, una letra minúscula, un número y un caracter especial."
         rules={[
           { required: true, message: 'Por favor ingrese su nueva contraseña' },
           { validator: validatePassword },
