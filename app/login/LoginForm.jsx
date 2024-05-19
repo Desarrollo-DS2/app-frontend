@@ -49,7 +49,6 @@ const App = () => {
     }
   };
   
-
   const onGoForgotPassword = () => {
     router.push('/forgot-password')
   }
