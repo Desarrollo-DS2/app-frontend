@@ -27,22 +27,28 @@ const App = () => {
   const recaptchaRef = createRef()
 
   const onFinish = async ({ email, password }) => {
-    const user = { email, password }
-
+    const user = { email, password };
+  
     if (user) {
-      try {
-        const res = await login(dispatch, user, recaptchaRef.current.getValue())
-        console.log(res)
-        if (res.success) {
-          router.push('/home')
-        }
-      } catch (error) {
-        handleLoginError(dispatch, null, error)
-      }
+      login(dispatch, user, recaptchaRef.current.getValue())
+        .then((response) => {
+          if (response?.success) {
+            router.push('/home');
+          } else {
+            recaptchaRef.current.reset();
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          handleLoginError(dispatch, null, error);
+          recaptchaRef.current.reset();
+        });
     } else {
-      handleLoginError(dispatch)
+      handleLoginError(dispatch);
+      recaptchaRef.current.reset();
     }
-  }
+  };
+  
 
   const onGoForgotPassword = () => {
     router.push('/forgot-password')
@@ -96,7 +102,6 @@ const App = () => {
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-          onFinish={onFinish}
           data-testid="recaptcha"
         />
       </Form.Item>
