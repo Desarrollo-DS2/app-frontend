@@ -20,43 +20,43 @@ export const validateEmail = (rule, value) => {
   return Promise.resolve()
 }
 
+export const onFinish = async ({ email, password }, recaptchaRef, dispatch, router) => {
+  const user = { email, password };
+
+  if (user && user.email && user.password) {
+    login(dispatch, user, recaptchaRef.current.getValue())
+      .then((response) => {
+        if (response?.success) {
+          router.push('/home');
+        } else {
+          recaptchaRef.current.reset();
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        handleLoginError(dispatch, null, error);
+        recaptchaRef.current.reset();
+      });
+  } else {
+    handleLoginError(dispatch);
+    recaptchaRef.current.reset();
+  }
+};
+
+export const onGoForgotPassword = (router) => {
+  router.push('/forgot-password')
+}
+
 const App = () => {
   const { dispatch } = useAuthUser()
   const router = useRouter()
 
   const recaptchaRef = createRef()
 
-  const onFinish = async ({ email, password }) => {
-    const user = { email, password };
-  
-    if (user) {
-      login(dispatch, user, recaptchaRef.current.getValue())
-        .then((response) => {
-          if (response?.success) {
-            router.push('/home');
-          } else {
-            recaptchaRef.current.reset();
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          handleLoginError(dispatch, null, error);
-          recaptchaRef.current.reset();
-        });
-    } else {
-      handleLoginError(dispatch);
-      recaptchaRef.current.reset();
-    }
-  };
-  
-  const onGoForgotPassword = () => {
-    router.push('/forgot-password')
-  }
-
   return (
     <Form
       name="login"
-      onFinish={(values) => onFinish(values)}
+      onFinish={(values) => onFinish(values, recaptchaRef, dispatch, router)}
       autoComplete="off"
       layout="vertical"
       style={{ minWidth: '400px' }}
@@ -92,7 +92,7 @@ const App = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="link" style={{ padding: 0 }} onClick={onGoForgotPassword}>
+        <Button type="link" style={{ padding: 0 }} onClick={()=>(onGoForgotPassword(router))}>
           Recuperar Contraseña
         </Button>
       </Form.Item>
