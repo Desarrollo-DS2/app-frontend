@@ -1,10 +1,17 @@
-import apiBase from '../api'
+import apiBase from './rootApi'
 
-// This is a example of how to use the apiBase to make a request to the server
-
-export const getAuthUser = async () => {
+export const loginAuthUser = async (login) => {
   try {
-    const response = await apiBase.get('/auth-user/')
+    const response = await apiBase.post('/auth/jwt/create', login)
+    return response.data
+  } catch (error) {
+    return error.response.data
+  }
+}
+
+export const verifyCaptcha = async (captcha) => {
+  try {
+    const response = await apiBase.post('/recaptcha/', captcha)
     return response.data
   } catch (error) {
     return error.response.data

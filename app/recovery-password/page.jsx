@@ -2,11 +2,11 @@ import React from 'react'
 
 import { Flex } from 'antd'
 
-import LoginForm from './LoginForm'
-import LoginSide from './LoginSide'
-import LoginHeader from './LoginHeader'
+import RecoveryHeader from './RecoveryHeader'
+import LoginSide from '../login/LoginSide'
+import RecoveryForm from './RecoveryForm'
 
-export default function LoginPage() {
+export default function RecoveryPage() {
   return (
     <Flex className="shadow-md m-5">
       <LoginSide />
@@ -15,8 +15,8 @@ export default function LoginPage() {
         className="bg-slate-100 p-5 pt-7 rounded-tr-md rounded-bt-md"
         vertical
       >
-        <LoginHeader />
-        <LoginForm />
+        <RecoveryHeader />
+        <RecoveryForm />
       </Flex>
     </Flex>
   )
