@@ -8,10 +8,11 @@ const onFinish = (values) => {
   console.log('Received values of form:', values)
 }
 
-const specialCharactersAllowed = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+const specialCharactersAllowed = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/
 
 const validatePassword = (rule, value) => {
-  if (value.length < 8 ||
+  if (
+    value.length < 8 ||
     !/[A-Z]/.test(value) ||
     !/[a-z]/.test(value) ||
     !/\d/.test(value) ||
@@ -41,7 +42,7 @@ const RecoveryForm = () => (
       <Form.Item
         label="Nueva contraseña"
         name="newPassword"
-        tooltip = "La contraseña debe tener mínimo 8 caracteres, una letra mayúscula, una letra minúscula, un número y un caracter especial."
+        tooltip="La contraseña debe tener mínimo 8 caracteres, una letra mayúscula, una letra minúscula, un número y un caracter especial."
         rules={[
           { required: true, message: 'Por favor ingrese su nueva contraseña' },
           { validator: validatePassword },

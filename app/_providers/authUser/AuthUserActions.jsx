@@ -32,11 +32,11 @@ export const login = async (dispatch, payload, captcha) => {
                     resolve({ success: true })
                   } else {
                     handleLoginError(dispatch)
-                    reject(new Error("Invalid token"))
+                    reject(new Error('Invalid token'))
                   }
                 } else {
                   handleLoginError(dispatch)
-                  reject(new Error("Invalid token"))
+                  reject(new Error('Invalid token'))
                 }
               })
               .catch((error) => {
@@ -56,8 +56,8 @@ export const login = async (dispatch, payload, captcha) => {
     } else {
       reject(new Error('Captcha not verified'))
     }
-  });
-};
+  })
+}
 
 export const logout = async (dispatch) => {
   try {
