@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { fireEvent, getByTestId, render } from '@testing-library/react'
 import PropTypes from 'prop-types'
 import ForgotLayout from '../../app/forgot-password/layout'
 import RecoveryLayout from '../../app/recovery-password/layout'
@@ -82,12 +82,30 @@ describe('ForgotLayout', () => {
     expect(childComponentText).toBeInTheDocument()
 
     const parentContainer = getByText('Child Component').parentElement
-    expect(parentContainer).toHaveClass(
-      'items-center justify-center ant-flex css-dev-only-do-not-override-1kuana8 ant-flex-align-stretch ant-flex-vertical'
-    )
+    expect(parentContainer).toHaveClass('ant-layout-content')
   })
 
   it('debería tener una propiedad children requerida', () => {
     expect(HomeLayout.propTypes.children).toBe(PropTypes.node.isRequired)
+  })
+
+  it('daberia alternar el estado de la propiedad collapsed', () => {
+    const { getByTestId } = render(
+      <HomeLayout>
+        <MockChildComponent />
+      </HomeLayout>
+    )
+
+    const button = getByTestId('toggle-button')
+    expect(button).toBeInTheDocument()
+
+    const navbar = getByTestId('navbar')
+    expect(navbar).toBeInTheDocument()
+
+    expect(navbar).not.toHaveClass('ant-layout-sider-collapsed')
+
+    fireEvent.click(button)
+
+    expect(navbar).toHaveClass('ant-layout-sider-collapsed')
   })
 })

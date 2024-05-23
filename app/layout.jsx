@@ -26,6 +26,9 @@ export default function RootLayout({ children }) {
               theme={{
                 token: { fontFamily: poppins.style.fontFamily },
                 components: {
+                  Layout: {
+                    siderBg: '#B91C1C',
+                  },
                   Button: {
                     colorPrimary: '#B91C1C',
                     colorPrimaryHover: '#AC1A2A',
