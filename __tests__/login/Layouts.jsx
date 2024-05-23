@@ -5,8 +5,13 @@ import ForgotLayout from '../../app/forgot-password/layout'
 import RecoveryLayout from '../../app/recovery-password/layout'
 import LoginLayout from '../../app/login/layout'
 import HomeLayout from '../../app/home/layout'
+import { AuthUserProvider } from '../../app/_providers/authUser/AuthUserProvider'
 
 const MockChildComponent = () => <div>Child Component</div>
+
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({ push: jest.fn() }),
+}))
 
 describe('ForgotLayout', () => {
   it('debería renderizar correctamente con los elementos hijos', () => {
@@ -73,9 +78,11 @@ describe('ForgotLayout', () => {
 
   it('debería renderizar correctamente con los elementos hijos', () => {
     const { getByText } = render(
-      <HomeLayout>
-        <MockChildComponent />
-      </HomeLayout>
+      <AuthUserProvider>
+        <HomeLayout>
+          <MockChildComponent />
+        </HomeLayout>
+      </AuthUserProvider>
     )
 
     const childComponentText = getByText('Child Component')
@@ -91,9 +98,11 @@ describe('ForgotLayout', () => {
 
   it('daberia alternar el estado de la propiedad collapsed', () => {
     const { getByTestId } = render(
-      <HomeLayout>
-        <MockChildComponent />
-      </HomeLayout>
+      <AuthUserProvider>
+        <HomeLayout>
+          <MockChildComponent />
+        </HomeLayout>
+      </AuthUserProvider>
     )
 
     const button = getByTestId('toggle-button')
