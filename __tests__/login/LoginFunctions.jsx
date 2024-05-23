@@ -44,7 +44,7 @@ describe('On Finish', () => {
       { email, password },
       recaptchaRef.current.getValue()
     )
-    expect(router.push).toHaveBeenCalledWith('/home')
+    expect(router.push).toHaveBeenCalledWith('/home/tickets')
     expect(recaptchaRef.current.reset).not.toHaveBeenCalled()
   })
 

@@ -32,7 +32,7 @@ export const onFinish = async (
     login(dispatch, user, recaptchaRef.current.getValue())
       .then((response) => {
         if (response?.success) {
-          router.push('/home')
+          router.push('/home/tickets')
         } else {
           recaptchaRef.current.reset()
         }

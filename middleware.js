@@ -20,7 +20,7 @@ export function middleware(request) {
     (publicRoutes.includes(request.nextUrl.pathname) ||
       request.nextUrl.pathname === '/')
   ) {
-    return NextResponse.redirect(new URL('/home', request.url))
+    return NextResponse.redirect(new URL('/home/tickets', request.url))
   }
 }
 
