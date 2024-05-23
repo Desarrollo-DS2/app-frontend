@@ -16,7 +16,7 @@ const Navbar = ({ collapsed }) => {
         <Image
           src="/logoUnivalleBlanco.png"
           alt="Logo"
-          width={collapsed ? 60 : 60}
+          width={60}
           height={60}
           className="m-4"
         />
