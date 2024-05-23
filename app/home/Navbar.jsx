@@ -5,6 +5,8 @@ import { TbLogout2 } from 'react-icons/tb'
 import { logout } from '../_providers/authUser/AuthUserActions'
 import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
 import { useRouter } from 'next/navigation'
+import { IoTicket } from 'react-icons/io5'
+import { IoRestaurant } from 'react-icons/io5'
 
 const { Sider } = Layout
 
@@ -26,6 +28,21 @@ const Navbar = ({ collapsed }) => {
       label: 'Cerrar sesión',
       icon: <TbLogout2 />,
       onClick: () => handleLogout(dispatch, router),
+    },
+  ]
+
+  const items = [
+    {
+      key: '0',
+      label: 'Tickets',
+      icon: <IoTicket />,
+      onClick: () => router.push('/home/tickets'),
+    },
+    {
+      key: '1',
+      label: 'Otros',
+      icon: <IoRestaurant />,
+      onClick: () => router.push('/home/otros'),
     },
   ]
 
@@ -55,7 +72,7 @@ const Navbar = ({ collapsed }) => {
       </Flex>
       <Divider style={{ margin: 0 }} />
       <Flex vertical justify="space-between" className="h-[calc(100%-95px)]">
-        <Menu mode="inline" items={[]} />
+        <Menu items={items} defaultSelectedKeys={['0']} style={{ border: 0 }} />
         <Menu mode="inline" items={logoutItem} style={{ border: 0 }} />
       </Flex>
     </Sider>
