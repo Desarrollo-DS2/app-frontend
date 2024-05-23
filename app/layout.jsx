@@ -42,6 +42,10 @@ export default function RootLayout({ children }) {
                     itemHoverColor: '#B91C1C',
                     itemHoverBg: '#F5F5F5',
                   },
+                  Avatar: {
+                    textFontSize: 40,
+                    textFontSizeLG: 60,
+                  },
                 },
               }}
             >
