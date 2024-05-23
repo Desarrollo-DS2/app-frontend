@@ -1,10 +1,34 @@
 import React from 'react'
-import { Layout, Menu, Flex, Text, Divider } from 'antd'
+import { Layout, Menu, Flex, Divider } from 'antd'
 import Image from 'next/image'
+import { TbLogout2 } from 'react-icons/tb'
+import { logout } from '../_providers/authUser/AuthUserActions'
+import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
+import { useRouter } from 'next/navigation'
 
 const { Sider } = Layout
 
+export const handleLogout = async (dispatch, router) => {
+  const res = await logout(dispatch)
+  if (res.success) {
+    router.replace('/', { replace: true })
+    window.location.reload()
+  }
+}
+
 const Navbar = ({ collapsed }) => {
+  const { dispatch } = useAuthUser()
+  const router = useRouter()
+
+  const logoutItem = [
+    {
+      key: '0',
+      label: 'Cerrar sesión',
+      icon: <TbLogout2 />,
+      onClick: () => handleLogout(dispatch, router),
+    },
+  ]
+
   return (
     <Sider
       trigger={null}
@@ -30,7 +54,10 @@ const Navbar = ({ collapsed }) => {
         )}
       </Flex>
       <Divider style={{ margin: 0 }} />
-      <Menu mode="inline" items={[]} />
+      <Flex vertical justify="space-between" className="h-[calc(100%-95px)]">
+        <Menu mode="inline" items={[]} />
+        <Menu mode="inline" items={logoutItem} style={{ border: 0 }} />
+      </Flex>
     </Sider>
   )
 }

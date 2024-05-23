@@ -34,6 +34,14 @@ export default function RootLayout({ children }) {
                     colorPrimaryHover: '#AC1A2A',
                     colorPrimaryActive: '#AC1A2A',
                   },
+                  Menu: {
+                    itemBg: '#B91C1C',
+                    itemSelectedBg: '#F5F5F5',
+                    itemSelectedColor: '#B91C1C',
+                    itemColor: '#F5F5F5',
+                    itemHoverColor: '#B91C1C',
+                    itemHoverBg: '#F5F5F5',
+                  },
                 },
               }}
             >
