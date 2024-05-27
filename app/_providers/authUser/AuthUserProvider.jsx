@@ -1,7 +1,7 @@
 'use client'
-
-import { createContext, useReducer, useContext } from 'react'
-
+import React, { useEffect } from 'react'
+import Cookies from 'js-cookie'
+import { createContext, useReducer, useContext, use } from 'react'
 import { actionTypes } from './AuthUserActions'
 
 const authUserContext = createContext()
@@ -54,6 +54,22 @@ export const authUserReducer = (state, action) => {
 
 export const AuthUserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authUserReducer, initialState)
+
+  useEffect(() => {
+    if (state.loggedIn && state.credentials) {
+      const currentUser = JSON.parse(Cookies.get('currentUser'))
+      if (currentUser) {
+        dispatch({
+          type: actionTypes.LOGIN,
+          payload: {
+            user: JSON.parse(sessionStorage.getItem('currentUser')),
+            access: currentUser.access,
+            refresh: currentUser.refresh,
+          },
+        })
+      }
+    }
+  }, [])
 
   return (
     <authUserContext.Provider value={{ state, dispatch }}>

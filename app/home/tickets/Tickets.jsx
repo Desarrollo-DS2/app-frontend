@@ -1,24 +1,25 @@
 import React from 'react'
-import { Flex } from 'antd';
+import { Flex } from 'antd'
 import { IoTicket } from 'react-icons/io5'
-import { FaDollarSign } from "react-icons/fa";
+import { FaDollarSign } from 'react-icons/fa'
 
-const Tickets = () => {
-
+const Tickets = ({ user }) => {
   return (
-    <Flex vertical>
+    <Flex vertical gap={20}>
       <Flex gap={20}>
-        <IoTicket size={128}/>
-        <Flex vertical>
-            <h1>Tickets Actuales</h1>
-            <h2>5</h2>
+        <IoTicket size={100} color="#db463c" />
+        <Flex vertical className="tickets-info">
+          <h1 className="font-medium">Tickets Acumulados:</h1>
+          <h2>{user?.num_tickets}</h2>
+          <h1 className="font-medium">Tickets Maximos</h1>
+          <h2>30</h2>
         </Flex>
       </Flex>
       <Flex gap={20}>
-        <FaDollarSign size={128}/>
-        <Flex vertical>
-            <h1>Tickets Precio</h1>
-            <h2>2000</h2>
+        <FaDollarSign size={100} color="#db463c" />
+        <Flex vertical className="tarifa-info">
+          <h1 className="font-medium">Tarifa:</h1>
+          <h2>2500 COP</h2>
         </Flex>
       </Flex>
     </Flex>
