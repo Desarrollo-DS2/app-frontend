@@ -20,7 +20,7 @@ const TicketsPage = () => {
   return (
     <Flex gap={40} vertical>
       <h1 className="tickets-title">Consultar Tickets</h1>
-      <Flex gap={40} style={{maxHeight: '100%'}}>
+      <Flex gap={40} style={{ maxHeight: '100%' }}>
         <Flex gap={40} vertical>
           <User user={user} />
           <Tickets numTickets={0} />
