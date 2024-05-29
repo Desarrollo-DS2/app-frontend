@@ -40,7 +40,6 @@ const User = ({ user }) => {
 }
 
 User.propTypes = {
-  user: PropTypes.object,
   user: PropTypes.shape({
     email: PropTypes.string,
     first_name: PropTypes.string,
