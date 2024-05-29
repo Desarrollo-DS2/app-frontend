@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Col, Row, Table } from 'antd'
+import { Table } from 'antd'
 
 const { Column } = Table
 
@@ -29,7 +29,7 @@ const data = [
     day: 'Miércoles',
     sopa: 'De Torrejas',
     arroz: 'Blanco',
-    carne: 'Cerdo Asado	',
+    carne: 'Cerdo Asado',
     principio: 'Pastas con Verduras',
     ensalada: 'Pastas con Verduras',
     jugo: 'Mango',
@@ -39,7 +39,7 @@ const data = [
     day: 'Jueves',
     sopa: 'Consome',
     arroz: 'Blanco',
-    carne: 'Filete de Pollo	',
+    carne: 'Filete de Pollo',
     principio: 'Banano',
     ensalada: 'Lechuga, Zanahoria y Tomate',
     jugo: 'Lulo',
@@ -56,20 +56,26 @@ const data = [
   },
 ]
 
+const columns = [
+  { title: "Dia", dataIndex: "day", key: "day" },
+  { title: "Sopa", dataIndex: "sopa", key: "sopa" },
+  { title: "Arroz", dataIndex: "arroz", key: "arroz" },
+  { title: "Carne", dataIndex: "carne", key: "carne" },
+  { title: "Principio", dataIndex: "principio", key: "principio" },
+  { title: "Ensalada", dataIndex: "ensalada", key: "ensalada" },
+  { title: "Jugo", dataIndex: "jugo", key: "jugo" },
+]
+
 const Menu = () => {
   return (
     <Table
       dataSource={data}
       pagination={false}
-      style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}
+      style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }}
     >
-      <Column title="Dia" dataIndex="day" key="day"/>
-      <Column title="Sopa" dataIndex="sopa" key="sopa" />
-      <Column title="Arroz" dataIndex="arroz" key="arroz" />
-      <Column title="Carne" dataIndex="carne" key="carne" />
-      <Column title="Principio" dataIndex="principio" key="principio" />
-      <Column title="Ensalada" dataIndex="ensalada" key="ensalada" />
-      <Column title="Jugo" dataIndex="jugo" key="jugo" />
+      {columns.map((col) => (
+        <Column title={col.title} dataIndex={col.dataIndex} key={col.key} />
+      ))}
     </Table>
   )
 }
