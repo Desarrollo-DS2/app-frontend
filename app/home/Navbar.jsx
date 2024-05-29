@@ -6,6 +6,7 @@ import { logout } from '../_providers/authUser/AuthUserActions'
 import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
 import { useRouter } from 'next/navigation'
 import { IoTicket, IoSettings } from 'react-icons/io5'
+import { FaShoppingCart } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 
 const { Sider } = Layout
@@ -34,12 +35,18 @@ const Navbar = ({ collapsed }) => {
   const items = [
     {
       key: '0',
-      label: 'Tickets',
+      label: 'Consultar Tickets',
       icon: <IoTicket />,
       onClick: () => router.push('/home/tickets'),
     },
     {
       key: '1',
+      label: 'Comprar Tickets',
+      icon: <FaShoppingCart />,
+      onClick: () => {},
+    },
+    {
+      key: '2',
       label: 'Configuración',
       icon: <IoSettings />,
       onClick: () => {},
