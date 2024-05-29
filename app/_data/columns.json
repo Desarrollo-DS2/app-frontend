@@ -1,0 +1,9 @@
+[
+  { "title": "Dia", "dataIndex": "day", "key": "day" },
+  { "title": "Sopa", "dataIndex": "sopa", "key": "sopa" },
+  { "title": "Arroz", "dataIndex": "arroz", "key": "arroz" },
+  { "title": "Carne", "dataIndex": "carne", "key": "carne" },
+  { "title": "Principio", "dataIndex": "principio", "key": "principio" },
+  { "title": "Ensalada", "dataIndex": "ensalada", "key": "ensalada" },
+  { "title": "Jugo", "dataIndex": "jugo", "key": "jugo" }
+]

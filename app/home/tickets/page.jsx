@@ -1,10 +1,11 @@
 'use client'
 
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import User from './User'
 import Tickets from './Tickets'
 import { Flex } from 'antd'
 import { useAuthUser } from '@/app/_providers/authUser/AuthUserProvider'
+import Menu from './Menu'
 
 const TicketsPage = () => {
   const { state } = useAuthUser()
@@ -19,12 +20,13 @@ const TicketsPage = () => {
   return (
     <Flex gap={40} vertical>
       <h1 className="tickets-title">Consultar Tickets</h1>
-      <Flex gap={40}>
-        <Flex gap={40} vertical className=" border-black">
+      <Flex gap={40} style={{ maxHeight: '100%' }}>
+        <Flex gap={40} vertical>
           <User user={user} />
           <Tickets numTickets={0} />
         </Flex>
-        <Flex gap={40} vertical className=" border-black">
+        <Flex gap={40} vertical>
+          <Menu />
         </Flex>
       </Flex>
     </Flex>
