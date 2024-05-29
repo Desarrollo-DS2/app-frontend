@@ -46,6 +46,11 @@ export default function RootLayout({ children }) {
                     textFontSize: 40,
                     textFontSizeLG: 60,
                   },
+                  Table: {
+                    headerBg: '#DB463C',
+                    headerColor: '#F5F5F5',
+                    colorBgContainer: '#f8f8ff',
+                  },
                 },
               }}
             >
