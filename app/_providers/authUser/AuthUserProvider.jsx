@@ -1,8 +1,8 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { createContext, useReducer, useContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { createContext, useReducer, useContext, use } from 'react'
 import { actionTypes } from './AuthUserActions'
+import { jwtDecode } from 'jwt-decode'
 
 const authUserContext = createContext()
 
@@ -56,13 +56,14 @@ export const AuthUserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authUserReducer, initialState)
 
   useEffect(() => {
-    if (state.loggedIn && state.credentials) {
-      const currentUser = JSON.parse(Cookies.get('currentUser'))
+    const token = Cookies.get('currentUser')
+    if (token) {
+      const currentUser = JSON.parse(token)
       if (currentUser) {
         dispatch({
           type: actionTypes.LOGIN,
           payload: {
-            user: JSON.parse(sessionStorage.getItem('currentUser')),
+            user: jwtDecode(currentUser.access),
             access: currentUser.access,
             refresh: currentUser.refresh,
           },

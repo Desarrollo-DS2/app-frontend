@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, {useState} from 'react'
 import User from './User'
 import Tickets from './Tickets'
 import { Flex } from 'antd'
@@ -13,8 +13,7 @@ const TicketsPage = () => {
     ...state.credentials,
     nit: '1110363276',
     code: '2182551',
-    role: 'Estudiante Pregrado',
-    num_tickets: 5,
+    role: 'Administrador',
   }
 
   return (
@@ -23,9 +22,10 @@ const TicketsPage = () => {
       <Flex gap={40}>
         <Flex gap={40} vertical className=" border-black">
           <User user={user} />
-          <Tickets user={user} />
+          <Tickets numTickets={0} />
         </Flex>
-        <Flex gap={40} vertical className=" border-black"></Flex>
+        <Flex gap={40} vertical className=" border-black">
+        </Flex>
       </Flex>
     </Flex>
   )

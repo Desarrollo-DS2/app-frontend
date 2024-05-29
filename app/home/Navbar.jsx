@@ -5,8 +5,8 @@ import { TbLogout2 } from 'react-icons/tb'
 import { logout } from '../_providers/authUser/AuthUserActions'
 import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
 import { useRouter } from 'next/navigation'
-import { IoTicket } from 'react-icons/io5'
-import { IoSettings } from 'react-icons/io5'
+import { IoTicket, IoSettings } from 'react-icons/io5'
+import PropTypes from 'prop-types'
 
 const { Sider } = Layout
 
@@ -81,6 +81,10 @@ const Navbar = ({ collapsed }) => {
       </Flex>
     </Sider>
   )
+}
+
+Navbar.propTypes = {
+  collapsed: PropTypes.bool,
 }
 
 export default Navbar

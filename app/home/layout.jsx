@@ -37,7 +37,7 @@ export default function HomeLayout({ children }) {
         </Header>
         <Content
           style={{
-            margin: '14px 64px',
+            margin: '12px 12px',
             padding: 24,
             minHeight: 280,
           }}
