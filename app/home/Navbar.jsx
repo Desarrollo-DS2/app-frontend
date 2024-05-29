@@ -5,8 +5,8 @@ import { TbLogout2 } from 'react-icons/tb'
 import { logout } from '../_providers/authUser/AuthUserActions'
 import { useAuthUser } from '../_providers/authUser/AuthUserProvider'
 import { useRouter } from 'next/navigation'
-import { IoTicket } from 'react-icons/io5'
-import { IoRestaurant } from 'react-icons/io5'
+import { IoTicket, IoSettings } from 'react-icons/io5'
+import PropTypes from 'prop-types'
 
 const { Sider } = Layout
 
@@ -40,9 +40,9 @@ const Navbar = ({ collapsed }) => {
     },
     {
       key: '1',
-      label: 'Otros',
-      icon: <IoRestaurant />,
-      onClick: () => router.push('/home/otros'),
+      label: 'Configuración',
+      icon: <IoSettings />,
+      onClick: () => {},
     },
   ]
 
@@ -62,7 +62,11 @@ const Navbar = ({ collapsed }) => {
           className="m-4"
         />
         {!collapsed && (
-          <Flex vertical align="flex-start" style={{ marginTop: '10px' }}>
+          <Flex
+            vertical
+            align="flex-start"
+            style={{ marginTop: '10px', color: 'white' }}
+          >
             <span>
               <strong>Restaurante</strong>
             </span>
@@ -77,6 +81,10 @@ const Navbar = ({ collapsed }) => {
       </Flex>
     </Sider>
   )
+}
+
+Navbar.propTypes = {
+  collapsed: PropTypes.bool,
 }
 
 export default Navbar
