@@ -15,6 +15,7 @@ const Menu = () => {
         maxHeight: 'calc(100vh - 64px)',
         overflowY: 'auto',
       }}
+      size="middle"
     >
       {columns.map((col) => (
         <Column title={col.title} dataIndex={col.dataIndex} key={col.key} />

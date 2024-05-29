@@ -33,6 +33,10 @@ export default function RootLayout({ children }) {
                     colorPrimary: '#B91C1C',
                     colorPrimaryHover: '#AC1A2A',
                     colorPrimaryActive: '#AC1A2A',
+                    defaultColor: '#F5F5F5',
+                    defaultBg: '#DB463C',
+                    defaultColorHover: '#AC1A2A',
+                    defaultColorActive: '#AC1A2A',
                   },
                   Menu: {
                     itemBg: '#B91C1C',
@@ -49,7 +53,7 @@ export default function RootLayout({ children }) {
                   Table: {
                     headerBg: '#DB463C',
                     headerColor: '#F5F5F5',
-                    colorBgContainer: '#f8f8ff',
+                    colorBgContainer: '#F8F8FF',
                   },
                 },
               }}

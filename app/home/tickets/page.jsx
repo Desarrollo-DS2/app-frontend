@@ -6,6 +6,7 @@ import Tickets from './Tickets'
 import { Flex } from 'antd'
 import { useAuthUser } from '@/app/_providers/authUser/AuthUserProvider'
 import Menu from './Menu'
+import BuyTicketsButton from './BuyTicketsButton'
 
 const TicketsPage = () => {
   const { state } = useAuthUser()
@@ -26,6 +27,7 @@ const TicketsPage = () => {
           <Tickets numTickets={0} />
         </Flex>
         <Flex gap={40} vertical>
+          <BuyTicketsButton />
           <Menu />
         </Flex>
       </Flex>
