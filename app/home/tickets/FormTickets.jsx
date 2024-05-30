@@ -2,6 +2,8 @@ import React from 'react'
 import Modal from 'antd/lib/modal/Modal'
 import { Form, InputNumber, Tag, Button } from 'antd'
 
+import PropTypes from 'prop-types'
+
 const requiredMark = (labek, { required }) => (
   <>
     {required && <Tag color="error">Required</Tag>}
@@ -83,6 +85,14 @@ const FormTickets = ({ open, numTickets, onFinish, onClose, isLoading }) => {
       </Form>
     </Modal>
   )
+}
+
+FormTickets.propTypes = {
+  open: PropTypes.bool.isRequired,
+  numTickets: PropTypes.number.isRequired,
+  onFinish: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 }
 
 export default FormTickets
