@@ -8,6 +8,7 @@ import { useAuthUser } from '@/app/_providers/authUser/AuthUserProvider'
 import Menu from './Menu'
 import BuyTicketsButton from './BuyTicketsButton'
 import FormTickets from './FormTickets'
+import AlertSuccess from './AlertSuccess'
 
 const TicketsPage = () => {
   const { state } = useAuthUser()
@@ -22,6 +23,7 @@ const TicketsPage = () => {
   const [numTickets, setNumTickets] = useState(0)
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [openAlert, setOpenAlert] = useState(false)
 
   const onFinish = ({ tickets }) => {
     setIsLoading(true)
@@ -29,6 +31,7 @@ const TicketsPage = () => {
       setIsLoading(false)
       setNumTickets((prev) => prev + tickets)
       setOpen(false)
+      setOpenAlert(true)
     }, 2000)
   }
 
@@ -59,6 +62,12 @@ const TicketsPage = () => {
         onClose={onClose}
         onFinish={onFinish}
         isLoading={isLoading}
+      />
+      <AlertSuccess
+        message="Tickets comprados exitosamente"
+        subtitle="Numero de orden: 1234567890"
+        open={openAlert}
+        setOpen={setOpenAlert}
       />
     </Flex>
   )

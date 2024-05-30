@@ -39,17 +39,4 @@ describe('FormTickets Component', () => {
     fireEvent.blur(input)
     expect(input.value).toBe('25')
   })
-
-  //   it('calls onFinish when clicking Comprar', async () => {
-  //     const { getByTestId } = render(<FormTickets {...defaultProps} />)
-  //     fireEvent.click(getByTestId('buy'))
-  //     await expect(handleFinish).toHaveBeenCalled()
-  //   })
-
-  //   it('calls onClose when clicking Cancelar', async () => {
-  //     const { getByTestId } = render(<FormTickets {...defaultProps} />)
-  //     const button = getByTestId('cancel')
-  //     fireEvent.click(button)
-  //     await expect(handleClose).toHaveBeenCalled()
-  //   })
 })
