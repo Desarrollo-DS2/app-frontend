@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'antd'
 import { FaShoppingCart } from 'react-icons/fa'
 
-const BuyTicketsButton = () => {
+const BuyTicketsButton = ({ onOpen }) => {
   return (
     <Button
       icon={<FaShoppingCart style={{ marginRight: 8 }} />}
@@ -15,6 +15,7 @@ const BuyTicketsButton = () => {
         alignItems: 'center',
         justifyContent: 'center',
       }}
+      onClick={onOpen}
     >
       Comprar Tickets
     </Button>

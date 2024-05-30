@@ -7,6 +7,7 @@ import { Flex } from 'antd'
 import { useAuthUser } from '@/app/_providers/authUser/AuthUserProvider'
 import Menu from './Menu'
 import BuyTicketsButton from './BuyTicketsButton'
+import FormTickets from './FormTickets'
 
 const TicketsPage = () => {
   const { state } = useAuthUser()
@@ -18,19 +19,47 @@ const TicketsPage = () => {
     role: 'Administrador',
   }
 
+  const [numTickets, setNumTickets] = useState(0)
+  const [open, setOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const onFinish = ({ tickets }) => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false)
+      setNumTickets((prev) => prev + tickets)
+      setOpen(false)
+    }, 2000)
+  }
+
+  const onClose = () => {
+    setOpen(false)
+  }
+
+  const onOpen = () => {
+    setOpen(true)
+  }
+
   return (
     <Flex gap={40} vertical>
       <h1 className="tickets-title">Consultar Tickets</h1>
       <Flex gap={40} style={{ maxHeight: '100%' }}>
         <Flex gap={40} vertical>
           <User user={user} />
-          <Tickets numTickets={0} />
+          <Tickets numTickets={numTickets} />
         </Flex>
         <Flex gap={40} vertical>
-          <BuyTicketsButton />
+          <BuyTicketsButton onOpen={onOpen} />
           <Menu />
         </Flex>
       </Flex>
+      <FormTickets
+        open={open}
+        numTickets={numTickets}
+        onClose={onClose}
+        onFinish={onFinish}
+        isLoading={isLoading}
+      />
     </Flex>
   )
 }

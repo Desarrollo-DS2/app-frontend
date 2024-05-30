@@ -41,12 +41,6 @@ const Navbar = ({ collapsed }) => {
     },
     {
       key: '1',
-      label: 'Comprar Tickets',
-      icon: <FaShoppingCart />,
-      onClick: () => {},
-    },
-    {
-      key: '2',
       label: 'Configuración',
       icon: <IoSettings />,
       onClick: () => {},
