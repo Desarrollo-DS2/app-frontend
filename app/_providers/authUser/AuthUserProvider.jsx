@@ -1,8 +1,8 @@
 'use client'
-
-import { createContext, useReducer, useContext } from 'react'
-
+import React, { createContext, useReducer, useContext, useEffect } from 'react'
+import Cookies from 'js-cookie'
 import { actionTypes } from './AuthUserActions'
+import { jwtDecode } from 'jwt-decode'
 
 const authUserContext = createContext()
 
@@ -54,6 +54,23 @@ export const authUserReducer = (state, action) => {
 
 export const AuthUserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authUserReducer, initialState)
+
+  useEffect(() => {
+    const token = Cookies.get('currentUser')
+    if (token) {
+      const currentUser = JSON.parse(token)
+      if (currentUser) {
+        dispatch({
+          type: actionTypes.LOGIN,
+          payload: {
+            user: jwtDecode(currentUser.access),
+            access: currentUser.access,
+            refresh: currentUser.refresh,
+          },
+        })
+      }
+    }
+  }, [])
 
   return (
     <authUserContext.Provider value={{ state, dispatch }}>

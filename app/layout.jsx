@@ -26,10 +26,34 @@ export default function RootLayout({ children }) {
               theme={{
                 token: { fontFamily: poppins.style.fontFamily },
                 components: {
+                  Layout: {
+                    siderBg: '#B91C1C',
+                  },
                   Button: {
                     colorPrimary: '#B91C1C',
                     colorPrimaryHover: '#AC1A2A',
                     colorPrimaryActive: '#AC1A2A',
+                    defaultColor: '#F5F5F5',
+                    defaultBg: '#DB463C',
+                    defaultColorHover: '#AC1A2A',
+                    defaultColorActive: '#AC1A2A',
+                  },
+                  Menu: {
+                    itemBg: '#B91C1C',
+                    itemSelectedBg: '#F5F5F5',
+                    itemSelectedColor: '#B91C1C',
+                    itemColor: '#F5F5F5',
+                    itemHoverColor: '#B91C1C',
+                    itemHoverBg: '#F5F5F5',
+                  },
+                  Avatar: {
+                    textFontSize: 40,
+                    textFontSizeLG: 60,
+                  },
+                  Table: {
+                    headerBg: '#DB463C',
+                    headerColor: '#F5F5F5',
+                    colorBgContainer: '#F8F8FF',
                   },
                 },
               }}

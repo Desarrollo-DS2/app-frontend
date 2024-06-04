@@ -1,9 +1,6 @@
 name: Build and test app
 
 on:
-  push:
-    branches:
-    - develop
   pull_request:
     branches:
     - master
